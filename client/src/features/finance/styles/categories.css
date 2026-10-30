@@ -1,0 +1,24 @@
+.category-page-intro { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 22px; margin-bottom: 14px; background: linear-gradient(110deg,#edf3ed,#f8f7f1); border: 1px solid #e6ece4; border-radius: 12px; }
+.category-page-intro h2 { color: #3b4e41; font-size: 17px; margin: 6px 0 5px; letter-spacing: -.5px; }
+.category-page-intro p { color: #839087; font-size: 10px; margin: 0; }
+.category-total-badge { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+.category-total-badge span { color: #819086; font-size: 9px; }
+.category-total-badge strong { color: #3f6950; font-size: 18px; }
+.category-card-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.category-detail-card { padding: 16px; min-height: 155px; border: 1px solid #e8ece6; border-radius: 12px; background: #fff; transition: transform .18s ease, box-shadow .18s ease; }
+.category-detail-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px #2e48340a; }
+.category-card-top { display: flex; align-items: center; justify-content: space-between; }
+.category-card-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; }
+.category-percentage { color: #819087; background: #f5f7f4; border-radius: 6px; padding: 5px 7px; font-size: 9px; font-weight: 700; }
+.category-detail-card h3 { color: #647168; font-size: 10px; margin: 12px 0 3px; }
+.category-card-amount { display: block; color: #36473c; font-size: 17px; letter-spacing: -.4px; }
+.progress-track { height: 4px; margin: 11px 0 7px; overflow: hidden; background: #f0f2ef; border-radius: 6px; }
+.progress-track span { display: block; height: 100%; border-radius: inherit; }
+.category-detail-card > small { color: #99a29b; font-size: 8px; }
+.empty-state { min-height: 290px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 1px dashed #dfe6de; border-radius: 13px; background: #fff; text-align: center; }
+.empty-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: #edf3ee; color: #668e70; }
+.empty-state h3 { color: #506054; font-size: 14px; margin: 14px 0 5px; }
+.empty-state p { color: #929c94; font-size: 10px; margin: 0 0 15px; }
+.page-footer { display: flex; justify-content: space-between; align-items: center; color: #a0aaa2; font-size: 9px; padding: 19px 2px 0; }
+.footer-brand { color: #819188; font-weight: 800; letter-spacing: -.3px; }
+.visually-hidden { position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }

@@ -1,0 +1,43 @@
+.overview-top { display: grid; grid-template-columns: minmax(245px,1.45fr) minmax(180px,1fr) minmax(180px,1fr); gap: 14px; margin-bottom: 15px; }
+.balance-card { min-height: 153px; position: relative; overflow: hidden; padding: 18px 21px 16px; color: white; border-radius: 13px; background: linear-gradient(118deg,#37634f 0%,#54836b 100%); box-shadow: 0 7px 19px #3b654c20; }
+.balance-card.balance-negative { background: linear-gradient(118deg,#764f48,#a36a5c); }
+.balance-card-top, .metric-top { display: flex; align-items: center; justify-content: space-between; }
+.balance-label { color: #d9e8ddc9; font-size: 9px; letter-spacing: 1.3px; font-weight: 800; }
+.balance-icon { color: #e3f0e6; width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid #ffffff36; border-radius: 9px; }
+.balance-amount { position: relative; z-index: 1; margin-top: 11px; font-size: clamp(24px,2.3vw,31px); line-height: 1.1; font-weight: 800; letter-spacing: -1.15px; font-variant-numeric: tabular-nums; }
+.balance-foot { position: relative; z-index: 1; display: flex; align-items: center; gap: 7px; color: #e3eee4d9; font-size: 9px; margin-top: 11px; }
+.balance-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #c5e3b6; }
+.balance-watermark { position: absolute; right: 15px; bottom: -20px; color: #ffffff10; transform: rotate(-7deg); }
+.metric-card { min-height: 153px; position: relative; overflow: hidden; background: #fff; border: 1px solid #e8ece6; border-radius: 13px; padding: 18px 19px; }
+.metric-top { color: #718078; font-size: 10px; font-weight: 700; }
+.metric-icon { width: 29px; height: 29px; border-radius: 9px; display: grid; place-items: center; }
+.income-icon { color: #5d916d; background: #edf5ed; }
+.expense-icon { color: #c7836d; background: #fbf0e9; }
+.metric-card > strong { display: block; color: #34443a; margin-top: 14px; font-size: clamp(20px,2vw,25px); letter-spacing: -.8px; font-variant-numeric: tabular-nums; }
+.metric-card > small { display: block; color: #98a199; margin-top: 5px; font-size: 9px; }
+.metric-accent { width: 58px; height: 3px; position: absolute; left: 19px; bottom: 0; border-radius: 4px 4px 0 0; opacity: .65; }
+.income-accent { background: #77a582; }
+.expense-accent { background: #dc9b7a; }
+.chart-grid { display: grid; grid-template-columns: minmax(0,1.65fr) minmax(270px,1fr); gap: 15px; margin-bottom: 15px; }
+.panel { min-width: 0; background: #fff; border: 1px solid #e8ece6; border-radius: 13px; box-shadow: 0 3px 12px #394b3d05; }
+.flow-panel, .category-panel { min-height: 340px; padding: 19px 20px 15px; }
+.panel-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; }
+.panel-heading h2 { color: #34433a; font-size: 14px; margin: 6px 0 4px; letter-spacing: -.25px; font-weight: 800; }
+.panel-heading p { margin: 0; color: #929b94; font-size: 9px; }
+.panel-chip { color: #75877a; background: #f4f7f3; border-radius: 7px; padding: 7px 9px; font-size: 9px; font-weight: 700; text-transform: capitalize; }
+.flow-chart { height: 220px; width: 100%; margin-top: 14px; }
+.chart-legend { display: flex; justify-content: center; gap: 20px; color: #7e8981; font-size: 9px; padding-top: 5px; }
+.chart-legend > span, .category-name { display: inline-flex; align-items: center; gap: 7px; }
+.legend-dot { width: 8px; height: 8px; display: inline-block; border-radius: 50%; flex: 0 0 auto; }
+.legend-income { background: #6c9b7f; }
+.legend-expense { background: #e3a17f; }
+.donut-wrap { width: 100%; max-width: 210px; height: 175px; margin: 4px auto 0; position: relative; }
+.donut-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; pointer-events: none; padding-top: 4px; }
+.donut-center span { color: #939c95; font-size: 8px; }
+.donut-center strong { color: #3c4b41; font-size: 15px; margin-top: 4px; letter-spacing: -.4px; }
+.category-legend { display: flex; flex-direction: column; gap: 9px; padding: 3px 4px 0; }
+.category-legend-row { display: flex; align-items: center; justify-content: space-between; color: #748078; font-size: 9px; }
+.category-legend-row strong { color: #58675d; font-size: 9px; }
+.empty-chart { height: 230px; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #9aa49d; gap: 10px; text-align: center; }
+.empty-chart p { margin: 0; font-size: 10px; }
+.empty-chart-icon { color: #8ea291; width: 36px; height: 36px; display: grid; place-items: center; background: #f2f6f1; border-radius: 11px; }

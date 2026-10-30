@@ -1,0 +1,50 @@
+.recent-panel { overflow: hidden; }
+.recent-heading { padding: 18px 20px 15px; align-items: center; }
+.text-button { border: 0; background: transparent; color: #5b876a; font-size: 10px; font-weight: 700; display: flex; align-items: center; gap: 2px; padding: 7px 0 7px 8px; }
+.text-button:hover { color: #315b45; }
+.table-scroll { overflow-x: auto; }
+.transactions-table { width: 100%; border-collapse: collapse; text-align: left; }
+.transactions-table thead { background: #fafbf9; border-top: 1px solid #eff2ed; border-bottom: 1px solid #eff2ed; }
+.transactions-table th { height: 34px; padding: 0 14px; color: #a0aaa2; font-size: 8px; font-weight: 800; letter-spacing: .85px; white-space: nowrap; }
+.transactions-table th:first-child, .transactions-table td:first-child { padding-left: 20px; }
+.transactions-table td { height: 53px; border-bottom: 1px solid #f0f2ee; padding: 0 14px; color: #68766d; font-size: 10px; white-space: nowrap; }
+.transactions-table tbody tr:last-child td { border-bottom: 0; }
+.transaction-description { display: flex; align-items: center; gap: 10px; }
+.transaction-description strong { color: #4c5b51; font-size: 10px; font-weight: 700; }
+.transaction-type-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; flex: 0 0 auto; }
+.type-income { color: #5a916d; background: #eef5ee; }
+.type-expense { color: #c38570; background: #fcf2ec; }
+.date-cell { color: #929b94 !important; text-transform: capitalize; }
+.category-pill { display: inline-flex; align-items: center; gap: 6px; color: #7d8980; background: #f5f7f4; border-radius: 6px; padding: 5px 8px; font-size: 9px; }
+.category-pill .legend-dot { width: 6px; height: 6px; }
+.amount-col, .amount-cell { text-align: right; }
+.amount-cell { color: #c27e6b !important; font-size: 10px !important; font-weight: 700; font-variant-numeric: tabular-nums; }
+.amount-cell.amount-positive { color: #5d8a68 !important; }
+.actions-col { width: 72px; }
+.row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 2px; opacity: .35; transition: opacity .15s ease; }
+tr:hover .row-actions, .row-actions:focus-within { opacity: 1; }
+.row-action { border: 0; width: 27px; height: 27px; display: grid; place-items: center; color: #738178; background: transparent; border-radius: 7px; }
+.row-action:hover { color: #477a67; background: #eff5ef; }
+.row-action.delete-action:hover { color: #bd685e; background: #fbefed; }
+.table-empty { min-height: 115px; display: flex; align-items: center; justify-content: center; gap: 9px; color: #9aa39d; font-size: 10px; }
+.table-empty svg { color: #a0ada2; }
+
+.transactions-panel { overflow: hidden; }
+.transactions-heading { padding: 20px 21px 17px; align-items: center; }
+.table-total { display: flex; flex-direction: column; gap: 4px; text-align: right; }
+.table-total span { color: #9aa39d; font-size: 9px; }
+.table-total strong { color: #446b52; font-size: 15px; }
+.filtered-summary { display: flex; align-items: center; gap: 19px; }
+.filtered-summary > div { display: flex; flex-direction: column; gap: 4px; text-align: right; }
+.filtered-summary span { color: #9aa39d; font-size: 8px; }
+.filtered-summary strong { color: #52775a; font-size: 11px; white-space: nowrap; }
+.filtered-summary strong.summary-negative { color: #bd685e; }
+.filter-bar { padding: 12px 20px; background: #fff; display: flex; gap: 9px; border-top: 1px solid #f1f3ef; }
+.search-box, .filter-select { display: flex; align-items: center; gap: 8px; height: 35px; border: 1px solid #e8ece6; border-radius: 8px; padding: 0 10px; color: #98a199; background: #fff; }
+.search-box { flex: 1; min-width: 150px; }
+.search-box input { width: 100%; min-width: 0; border: 0; outline: 0; color: #536158; background: transparent; font-size: 10px; }
+.search-box input::placeholder { color: #a5ada7; }
+.clear-search { border: 0; background: transparent; color: #94a097; display: grid; place-items: center; padding: 2px; }
+.filter-select select { border: 0; outline: 0; color: #69776d; background: transparent; font-size: 9px; min-width: 106px; }
+.category-filter select { min-width: 130px; }
+.compact-table { border: 0; border-radius: 0; box-shadow: none; }

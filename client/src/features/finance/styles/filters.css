@@ -1,0 +1,16 @@
+.global-filter-bar { display: grid; grid-template-columns: minmax(175px,1fr) minmax(205px,1.1fr) minmax(220px,1.2fr); gap: 13px; align-items: end; padding: 11px 14px; margin-bottom: 13px; border: 1px solid #e8ece6; border-radius: 11px; background: #fff; }
+.global-filter-group { display: flex; min-width: 0; flex-direction: column; gap: 6px; }
+.filter-caption { color: #9aa49d; font-size: 8px; font-weight: 800; letter-spacing: 1px; }
+.period-mode-tabs { display: flex; align-items: center; gap: 3px; padding: 3px; border-radius: 8px; background: #f3f6f2; }
+.period-mode-tabs button { flex: 1; min-width: 0; height: 28px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent; color: #7e8a80; font-size: 9px; font-weight: 700; transition: background .16s ease, color .16s ease, box-shadow .16s ease; }
+.period-mode-tabs button:hover { color: #3f7057; }
+.period-mode-tabs button.active { color: #3f7659; background: #fff; box-shadow: 0 1px 4px #30453514; }
+.period-picker { display: flex; align-items: center; gap: 4px; height: 34px; }
+.period-input-wrap { display: flex; flex: 1; min-width: 0; align-items: center; justify-content: center; gap: 7px; height: 34px; padding: 0 8px; border: 1px solid #e6ebe4; border-radius: 8px; color: #829086; background: #fff; }
+.period-input-wrap input { min-width: 0; max-width: 100%; border: 0; outline: 0; color: #56655b; background: transparent; font-family: inherit; font-size: 10px; font-weight: 700; }
+.period-input-wrap input[type="date"] { width: 125px; }
+.period-input-wrap input[type="month"] { width: 112px; }
+.period-input-wrap input[type="number"] { width: 66px; text-align: center; }
+.period-input-wrap input:focus-visible { outline: 0; }
+.range-caption { display: block; overflow: hidden; color: #97a198; font-size: 8px; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+.movement-tabs button { padding: 0 7px; }
