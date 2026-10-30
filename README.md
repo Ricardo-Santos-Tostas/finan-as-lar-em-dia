@@ -1,3 +1,4 @@
+curl -fsSL https://raw.githubusercontent.com/Ricardo-Santos-Tostas/finan-as-lar-em-dia/main/bootstrap-github-linux.sh | env LARFIN_REPOSITORY_URL=https://github.com/Ricardo-Santos-Tostas/finan-as-lar-em-dia.git bash
 # Lar em Dia — Finanças da Casa
 
 Sistema de gestão financeira doméstica desenvolvido com React, Express, tRPC, Drizzle ORM e MySQL.
