@@ -18,6 +18,16 @@ export default function FinanceDashboard() {
       ? "Entradas e saídas organizadas em um só lugar."
       : "Veja como cada parte da rotina participa do orçamento.";
 
+  const payTransaction = async (item: Transaction) => {
+    if (!window.confirm(`Marcar “${item.description}” como pago? O valor entra nas despesas de hoje.`)) return;
+    try {
+      await actions.payTransaction(item);
+      toast.success("Gasto marcado como pago. Ele entrou nas despesas.");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Não foi possível marcar o gasto como pago.");
+    }
+  };
+
   const removeTransaction = async (item: Transaction) => {
     const confirmation = state.storageMode === "local"
       ? `Excluir permanentemente “${item.description}” deste computador?`
@@ -84,6 +94,7 @@ export default function FinanceDashboard() {
       categories={state.categories}
       onEdit={actions.openEdit}
       onRemove={removeTransaction}
+      onPay={payTransaction}
       onSeeAll={() => actions.setView("transactions")}
     />}
 
@@ -100,6 +111,7 @@ export default function FinanceDashboard() {
       onCategoryChange={actions.setCategoryFilter}
       onEdit={actions.openEdit}
       onRemove={removeTransaction}
+      onPay={payTransaction}
     />}
 
     {state.view === "categories" && <CategoriesView

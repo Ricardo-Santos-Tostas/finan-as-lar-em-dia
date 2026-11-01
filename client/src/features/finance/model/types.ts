@@ -1,4 +1,4 @@
-export type TransactionType = "income" | "expense";
+export type TransactionType = "income" | "expense" | "upcoming";
 export type PeriodMode = "day" | "week" | "month" | "year";
 export type DateRange = { start: string; end: string };
 

@@ -46,6 +46,7 @@ export default function GlobalFilters({ period, anchorDate, rangeLabel, movement
         <button className={movementScope === "all" ? "active" : ""} aria-pressed={movementScope === "all"} onClick={() => onScopeChange("all")}>Todas</button>
         <button className={movementScope === "income" ? "active" : ""} aria-pressed={movementScope === "income"} onClick={() => onScopeChange("income")}>Entradas</button>
         <button className={movementScope === "expense" ? "active" : ""} aria-pressed={movementScope === "expense"} onClick={() => onScopeChange("expense")}>Despesas</button>
+        <button className={movementScope === "upcoming" ? "active" : ""} aria-pressed={movementScope === "upcoming"} onClick={() => onScopeChange("upcoming")}>Gastos futuros</button>
       </div>
     </div>
   </section>;

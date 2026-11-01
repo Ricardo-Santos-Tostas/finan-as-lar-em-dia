@@ -4,6 +4,7 @@
   .main-content { margin-left: 220px; }
   .page-wrap { padding-left: 27px; padding-right: 27px; }
   .overview-top { grid-template-columns: 1.25fr 1fr 1fr; }
+  .upcoming-metric { grid-column: 1 / -1; min-height: 96px; }
   .chart-grid { grid-template-columns: minmax(0,1.4fr) minmax(250px,1fr); }
 }
 @media (max-width: 930px) {
@@ -13,13 +14,14 @@
   .topbar { padding: 0 20px; }
   .overview-top { grid-template-columns: 1.3fr 1fr; }
   .expense-metric { grid-column: 2; }
+  .upcoming-metric { grid-column: 1 / -1; }
   .balance-card { grid-row: span 2; }
   .chart-grid { grid-template-columns: 1fr; }
   .category-panel { min-height: 310px; }
   .category-card-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .global-filter-bar { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
   .movement-group { grid-column: 1 / -1; }
-  .movement-tabs { max-width: 360px; }
+  .movement-tabs { max-width: none; }
 }
 @media (max-width: 700px) {
   .sidebar { width: 265px; max-width: calc(100vw - 50px); transform: translateX(-105%); transition: transform .22s ease; box-shadow: 12px 0 35px #20352815; }

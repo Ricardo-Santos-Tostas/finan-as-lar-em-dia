@@ -6,7 +6,7 @@ describe("local finance API validation", () => {
     expect(transactionInputSchema.safeParse({
       description: "Mercado",
       amount: 129.9,
-      type: "expense",
+      type: "upcoming",
       categoryId: "food",
       date: "2026-10-29",
     }).success).toBe(true);

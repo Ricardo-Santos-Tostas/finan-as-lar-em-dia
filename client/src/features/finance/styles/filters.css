@@ -13,4 +13,4 @@
 .period-input-wrap input[type="number"] { width: 66px; text-align: center; }
 .period-input-wrap input:focus-visible { outline: 0; }
 .range-caption { display: block; overflow: hidden; color: #97a198; font-size: 8px; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
-.movement-tabs button { padding: 0 7px; }
+.movement-tabs button { padding: 0 6px; font-size: 8px; white-space: nowrap; }

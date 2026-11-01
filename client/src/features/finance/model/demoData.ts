@@ -31,4 +31,5 @@ export const DEMO_TRANSACTIONS: Transaction[] = [
   { id: "demo-09", description: "Consulta pediátrica", amount: 160, type: "expense", categoryId: "health", date: demoDate(21) },
   { id: "demo-10", description: "Passeio em família", amount: 210, type: "expense", categoryId: "leisure", date: demoDate(24) },
   { id: "demo-11", description: "Combustível", amount: 180, type: "expense", categoryId: "moto", date: demoDate(26) },
+  { id: "demo-12", description: "Internet a pagar", amount: 120, type: "upcoming", categoryId: "home", date: demoDate(28) },
 ];

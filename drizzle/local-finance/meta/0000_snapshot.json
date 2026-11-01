@@ -99,7 +99,7 @@
         },
         "type": {
           "name": "type",
-          "type": "enum('income','expense')",
+          "type": "enum('income','expense','upcoming')",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false

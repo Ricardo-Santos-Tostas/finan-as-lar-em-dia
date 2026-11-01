@@ -1,7 +1,10 @@
 import { CATEGORIES } from "./demoData";
-import type { FinanceCategory } from "./types";
+import type { FinanceCategory, TransactionType } from "./types";
 
 const customCategoryColors = ["#b58468", "#7f91ae", "#a18c67", "#779c91", "#b47f8a", "#8d89aa"];
+
+export const categoryFitsTransaction = (category: FinanceCategory, type: TransactionType) =>
+  category.type === (type === "income" ? "income" : "expense");
 
 export const categoryById = (categoryId: string, categories: FinanceCategory[] = CATEGORIES) =>
   categories.find((category) => category.id === categoryId)

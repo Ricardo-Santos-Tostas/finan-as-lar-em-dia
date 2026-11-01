@@ -1,4 +1,4 @@
-.overview-top { display: grid; grid-template-columns: minmax(245px,1.45fr) minmax(180px,1fr) minmax(180px,1fr); gap: 14px; margin-bottom: 15px; }
+.overview-top { display: grid; grid-template-columns: minmax(220px,1.3fr) repeat(3,minmax(150px,1fr)); gap: 14px; margin-bottom: 15px; }
 .balance-card { min-height: 153px; position: relative; overflow: hidden; padding: 18px 21px 16px; color: white; border-radius: 13px; background: linear-gradient(118deg,#37634f 0%,#54836b 100%); box-shadow: 0 7px 19px #3b654c20; }
 .balance-card.balance-negative { background: linear-gradient(118deg,#764f48,#a36a5c); }
 .balance-card-top, .metric-top { display: flex; align-items: center; justify-content: space-between; }
@@ -13,11 +13,13 @@
 .metric-icon { width: 29px; height: 29px; border-radius: 9px; display: grid; place-items: center; }
 .income-icon { color: #5d916d; background: #edf5ed; }
 .expense-icon { color: #c7836d; background: #fbf0e9; }
+.upcoming-icon { color: #8a6d32; background: #f8f3e8; }
 .metric-card > strong { display: block; color: #34443a; margin-top: 14px; font-size: clamp(20px,2vw,25px); letter-spacing: -.8px; font-variant-numeric: tabular-nums; }
 .metric-card > small { display: block; color: #98a199; margin-top: 5px; font-size: 9px; }
 .metric-accent { width: 58px; height: 3px; position: absolute; left: 19px; bottom: 0; border-radius: 4px 4px 0 0; opacity: .65; }
 .income-accent { background: #77a582; }
 .expense-accent { background: #dc9b7a; }
+.upcoming-accent { background: #d2b16a; }
 .chart-grid { display: grid; grid-template-columns: minmax(0,1.65fr) minmax(270px,1fr); gap: 15px; margin-bottom: 15px; }
 .panel { min-width: 0; background: #fff; border: 1px solid #e8ece6; border-radius: 13px; box-shadow: 0 3px 12px #394b3d05; }
 .flow-panel, .category-panel { min-height: 340px; padding: 19px 20px 15px; }

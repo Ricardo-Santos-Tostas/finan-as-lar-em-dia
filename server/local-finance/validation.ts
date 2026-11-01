@@ -16,7 +16,7 @@ export const transactionInputSchema = z.object({
     .max(9_999_999_999)
     .refine((value) => Math.round(value * 100) > 0, "O valor mínimo é R$ 0,01.")
     .refine(hasAtMostTwoDecimalPlaces, "Use no máximo duas casas decimais."),
-  type: z.enum(["income", "expense"]),
+  type: z.enum(["income", "expense", "upcoming"]),
   categoryId: z.string().min(1).max(128),
   date: z.string().refine(validDateKey, "Informe uma data válida."),
 }).strict();

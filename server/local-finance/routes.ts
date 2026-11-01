@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
+import { categoryFitsTransaction, createCustomExpenseCategory } from "../../client/src/features/finance/model/categories";
 import { CATEGORIES } from "../../client/src/features/finance/model/demoData";
-import { createCustomExpenseCategory } from "../../client/src/features/finance/model/categories";
 import { localFinanceDatabaseEnabled } from "./database";
 import {
   createLocalCategory,
@@ -42,7 +42,7 @@ localFinanceRouter.post("/transactions", asyncRoute(async (req, res) => {
   const parsed = transactionInputSchema.safeParse(req.body);
   if (!parsed.success) return void res.status(400).json({ error: invalidBodyMessage(parsed.error.issues) });
   const categories = [...CATEGORIES, ...await listLocalCategories()];
-  const category = categories.find((item) => item.id === parsed.data.categoryId && item.type === parsed.data.type);
+  const category = categories.find((item) => item.id === parsed.data.categoryId && categoryFitsTransaction(item, parsed.data.type));
   if (!category) return void res.status(400).json({ error: "A categoria não corresponde ao tipo deste lançamento." });
   res.status(201).json(await createLocalTransaction(parsed.data));
 }));
@@ -54,7 +54,7 @@ localFinanceRouter.put("/transactions/:id", asyncRoute(async (req, res) => {
   const parsed = transactionInputSchema.safeParse(req.body);
   if (!parsed.success) return void res.status(400).json({ error: invalidBodyMessage(parsed.error.issues) });
   const categories = [...CATEGORIES, ...await listLocalCategories()];
-  if (!categories.some((item) => item.id === parsed.data.categoryId && item.type === parsed.data.type)) {
+  if (!categories.some((item) => item.id === parsed.data.categoryId && categoryFitsTransaction(item, parsed.data.type))) {
     return void res.status(400).json({ error: "A categoria não corresponde ao tipo deste lançamento." });
   }
   const updated = await updateLocalTransaction(parsedId.data, parsed.data);

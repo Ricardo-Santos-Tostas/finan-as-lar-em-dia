@@ -8,7 +8,8 @@ export const currency = (amount: number) =>
 export const totalsFor = (transactions: Transaction[]) => {
   const income = transactions.reduce((sum, item) => item.type === "income" ? sum + item.amount : sum, 0);
   const expenses = transactions.reduce((sum, item) => item.type === "expense" ? sum + item.amount : sum, 0);
-  return { income, expenses, balance: income - expenses };
+  const upcoming = transactions.reduce((sum, item) => item.type === "upcoming" ? sum + item.amount : sum, 0);
+  return { income, expenses, upcoming, balance: income - expenses };
 };
 
 export const flowForPeriod = (transactions: Transaction[], mode: PeriodMode, range: DateRange): FlowPoint[] => {
@@ -34,6 +35,7 @@ export const flowForPeriod = (transactions: Transaction[], mode: PeriodMode, ran
   }
 
   for (const item of transactionsInRange(transactions, range)) {
+    if (item.type === "upcoming") continue;
     const date = parseDateKey(item.date);
     const index = mode === "day" ? 0
       : mode === "week" ? Math.round((date.getTime() - start.getTime()) / 86400000)
@@ -54,7 +56,8 @@ export const categoryBreakdown = (
   for (const item of transactions) {
     if (item.type === type) sums.set(item.categoryId, (sums.get(item.categoryId) ?? 0) + item.amount);
   }
-  return categories.filter((category) => category.type === type)
+  const categoryType = type === "income" ? "income" : "expense";
+  return categories.filter((category) => category.type === categoryType)
     .map((category) => ({ ...category, amount: sums.get(category.id) ?? 0 }))
     .filter((category) => category.amount > 0)
     .sort((a, b) => b.amount - a.amount);

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { X } from "lucide-react";
+import { categoryFitsTransaction } from "../model/categories";
 import type { FinanceCategory, Transaction, TransactionInput, TransactionType } from "../model/types";
 import type { FinanceStorageMode } from "../types";
 
@@ -17,7 +18,7 @@ type Props = {
 
 export default function TransactionDialog({ open, initial, defaultDate, defaultType, categories, storageMode, onAddCategory, onClose, onSave }: Props) {
   const [type, setType] = useState<TransactionType>(initial?.type ?? defaultType);
-  const availableCategories = useMemo(() => categories.filter((category) => category.type === type), [categories, type]);
+  const availableCategories = useMemo(() => categories.filter((category) => categoryFitsTransaction(category, type)), [categories, type]);
   const [description, setDescription] = useState(initial?.description ?? "");
   const [amount, setAmount] = useState(initial ? String(initial.amount) : "");
   const [categoryId, setCategoryId] = useState(initial?.categoryId ?? "");
@@ -109,18 +110,19 @@ export default function TransactionDialog({ open, initial, defaultDate, defaultT
         <div className="type-switch" role="group" aria-label="Tipo de lançamento">
           <button className={type === "expense" ? "type-option active expense-active" : "type-option"} type="button" disabled={saving} onClick={() => setType("expense")}>Despesa</button>
           <button className={type === "income" ? "type-option active income-active" : "type-option"} type="button" disabled={saving} onClick={() => setType("income")}>Receita</button>
+          <button className={type === "upcoming" ? "type-option active upcoming-active" : "type-option"} type="button" disabled={saving} onClick={() => setType("upcoming")}>Gasto futuro</button>
         </div>
         <label className="field-label" htmlFor="transaction-description">Descrição</label>
-        <input id="transaction-description" className="form-control" autoFocus value={description} onChange={(event) => setDescription(event.target.value)} placeholder={type === "expense" ? "Ex.: Mercado do mês" : "Ex.: Salário"} maxLength={80} disabled={saving} />
+        <input id="transaction-description" className="form-control" autoFocus value={description} onChange={(event) => setDescription(event.target.value)} placeholder={type === "income" ? "Ex.: Salário" : type === "upcoming" ? "Ex.: Conta que ainda vou pagar" : "Ex.: Mercado do mês"} maxLength={80} disabled={saving} />
         <div className="form-row">
           <div className="form-field"><label className="field-label" htmlFor="transaction-amount">Valor</label><div className="amount-input-wrap"><span>R$</span><input id="transaction-amount" className="form-control" inputMode="decimal" value={amount} onChange={(event) => setAmount(event.target.value)} placeholder="0,00" disabled={saving} /></div></div>
-          <div className="form-field"><label className="field-label" htmlFor="transaction-date">Data</label><input id="transaction-date" className="form-control" type="date" value={date} onChange={(event) => setDate(event.target.value)} disabled={saving} /></div>
+          <div className="form-field"><label className="field-label" htmlFor="transaction-date">{type === "upcoming" ? "Data prevista" : "Data"}</label><input id="transaction-date" className="form-control" type="date" value={date} onChange={(event) => setDate(event.target.value)} disabled={saving} /></div>
         </div>
         <label className="field-label" htmlFor="transaction-category">Categoria</label>
         <select id="transaction-category" className="form-control" value={categoryId} onChange={(event) => setCategoryId(event.target.value)} disabled={saving}>
           {availableCategories.map((category) => <option value={category.id} key={category.id}>{category.icon}　{category.label}</option>)}
         </select>
-        {type === "expense" && <div className="custom-category-area">
+        {type !== "income" && <div className="custom-category-area">
           {showCategoryCreator ? <div className="custom-category-form">
             <label className="field-label" htmlFor="custom-expense-category">Nova categoria de despesa</label>
             <div className="custom-category-input-row"><input id="custom-expense-category" className="form-control" autoComplete="off" maxLength={32} value={newCategoryLabel} onChange={(event) => setNewCategoryLabel(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") { event.preventDefault(); void addExpenseCategory(); } }} placeholder="Ex.: Jardinagem" disabled={categorySaving} /><button className="button button-primary custom-category-add" type="button" onClick={() => { void addExpenseCategory(); }} disabled={categorySaving}>{categorySaving ? "Salvando..." : "Adicionar"}</button></div>
@@ -129,7 +131,7 @@ export default function TransactionDialog({ open, initial, defaultDate, defaultT
           </div> : <button className="add-category-link" type="button" disabled={saving} onClick={() => setShowCategoryCreator(true)}>＋ Criar categoria de despesa</button>}
         </div>}
         {error && <p className="form-error" role="alert">{error}</p>}
-        <div className="dialog-footnote">{storageMode === "local" ? "Este lançamento será salvo no banco de dados deste computador." : "Este lançamento fica apenas nesta sessão e será descartado ao recarregar."}</div>
+        <div className="dialog-footnote">{type === "upcoming" ? "Este valor fica previsto e só entra nas despesas quando você marcar como pago." : storageMode === "local" ? "Este lançamento será salvo no banco de dados deste computador." : "Este lançamento fica apenas nesta sessão e será descartado ao recarregar."}</div>
         <div className="dialog-actions"><button className="button button-quiet" type="button" disabled={saving} onClick={onClose}>Cancelar</button><button className="button button-primary" type="submit" disabled={saving}>{saving ? "Salvando..." : initial ? "Salvar alteração" : "Adicionar lançamento"}</button></div>
       </form>
     </section>

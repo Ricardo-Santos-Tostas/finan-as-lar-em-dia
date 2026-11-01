@@ -36,7 +36,7 @@ describe("finance calculations", () => {
     expect(flow[1]).toMatchObject({ Receitas: 100, Despesas: 0 });
     expect(flow[2]).toMatchObject({ Receitas: 0, Despesas: 30 });
     expect(flow.reduce((sum, point) => sum + point.Receitas + point.Despesas, 0)).toBe(130);
-    expect(totalsFor(transactions.filter((item) => item.date >= range.start && item.date <= range.end))).toEqual({ income: 100, expenses: 30, balance: 70 });
+    expect(totalsFor(transactions.filter((item) => item.date >= range.start && item.date <= range.end))).toEqual({ income: 100, expenses: 30, upcoming: 0, balance: 70 });
   });
 
   it("rejects blank or duplicate custom expense categories and includes valid ones in summaries", () => {
@@ -50,5 +50,16 @@ describe("finance calculations", () => {
     expect(breakdown).toHaveLength(1);
     expect(breakdown[0]).toMatchObject({ id: category!.id, label: "Veterinário", amount: 120 });
     expect(categoryById(category!.id, [...CATEGORIES, category!])).toEqual(category);
+  });
+
+  it("keeps future spending out of the balance until it is an expense", () => {
+    const items: Transaction[] = [
+      { id: "in", description: "Salário", amount: 200, type: "income", categoryId: "salary", date: "2026-11-01" },
+      { id: "paid", description: "Mercado", amount: 40, type: "expense", categoryId: "food", date: "2026-11-02" },
+      { id: "later", description: "Internet", amount: 120, type: "upcoming", categoryId: "home", date: "2026-11-20" },
+    ];
+    expect(totalsFor(items)).toEqual({ income: 200, expenses: 40, upcoming: 120, balance: 160 });
+    const flow = flowForPeriod(items, "month", { start: "2026-11-01", end: "2026-11-30" });
+    expect(flow.reduce((sum, point) => sum + point.Despesas, 0)).toBe(40);
   });
 });

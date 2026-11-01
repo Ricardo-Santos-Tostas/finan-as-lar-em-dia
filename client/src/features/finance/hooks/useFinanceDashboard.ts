@@ -56,7 +56,7 @@ export function useFinanceDashboard() {
   );
   const totals = useMemo(() => totalsFor(scopedItems), [scopedItems]);
   const flow = useMemo(() => flowForPeriod(scopedItems, period, range), [scopedItems, period, range]);
-  const breakdownType: TransactionType = movementScope === "income" ? "income" : "expense";
+  const breakdownType: TransactionType = movementScope === "income" ? "income" : movementScope === "upcoming" ? "upcoming" : "expense";
   const breakdown = useMemo(() => categoryBreakdown(scopedItems, breakdownType, categories), [scopedItems, breakdownType, categories]);
   const filteredItems = useMemo(() => scopedItems
     .filter((item) => categoryFilter === "all" || item.categoryId === categoryFilter)
@@ -64,7 +64,7 @@ export function useFinanceDashboard() {
     .sort((a, b) => b.date.localeCompare(a.date)), [scopedItems, categoryFilter, searchText]);
   const filteredTotals = useMemo(() => totalsFor(filteredItems), [filteredItems]);
   const visibleCategories = useMemo(
-    () => categories.filter((category) => movementScope === "all" || category.type === movementScope),
+    () => categories.filter((category) => movementScope === "all" || (movementScope === "upcoming" ? category.type === "expense" : category.type === movementScope)),
     [categories, movementScope],
   );
 
@@ -107,6 +107,26 @@ export function useFinanceDashboard() {
     setTransactions((items) => items.filter((item) => item.id !== id));
   };
 
+  const payTransaction = async (item: Transaction) => {
+    if (item.type !== "upcoming") return item;
+    const paid: TransactionInput = {
+      description: item.description,
+      amount: item.amount,
+      type: "expense",
+      categoryId: item.categoryId,
+      date: todayKey(),
+    };
+    if (storageMode === "local") {
+      const saved = await updateLocalTransaction(item.id, paid);
+      setTransactions((items) => items.map((current) => current.id === item.id ? saved : current));
+      return saved;
+    }
+    if (storageMode !== "demo") throw new Error(storageError || "Aguarde a conexão com o modo financeiro.");
+    const saved = { ...item, ...paid };
+    setTransactions((items) => items.map((current) => current.id === item.id ? saved : current));
+    return saved;
+  };
+
   const addCustomExpenseCategory = async (label: string) => {
     if (storageMode !== "demo" && storageMode !== "local") throw new Error(storageError || "Aguarde a conexão com o modo financeiro.");
     if (categories.some((category) => category.type === "expense" && category.label.toLocaleLowerCase("pt-BR") === label.trim().toLocaleLowerCase("pt-BR"))) return null;
@@ -118,12 +138,12 @@ export function useFinanceDashboard() {
     return category;
   };
 
-  const heroValue = movementScope === "all" ? totals.balance : movementScope === "income" ? totals.income : totals.expenses;
-  const heroLabel = movementScope === "all" ? "Saldo do período" : movementScope === "income" ? "Total de entradas" : "Total de despesas";
+  const heroValue = movementScope === "all" ? totals.balance : movementScope === "income" ? totals.income : movementScope === "upcoming" ? totals.upcoming : totals.expenses;
+  const heroLabel = movementScope === "all" ? "Saldo do período" : movementScope === "income" ? "Total de entradas" : movementScope === "upcoming" ? "Gastos futuros" : "Total de despesas";
   const heroStatus = movementScope === "all"
     ? totals.balance >= 0 ? "Um bom ritmo para a casa" : "As despesas passaram das receitas"
-    : movementScope === "income" ? "Entradas no intervalo selecionado" : "Despesas no intervalo selecionado";
-  const breakdownTotal = breakdownType === "income" ? totals.income : totals.expenses;
+    : movementScope === "income" ? "Entradas no intervalo selecionado" : movementScope === "upcoming" ? "Ainda não saíram da conta" : "Despesas no intervalo selecionado";
+  const breakdownTotal = breakdownType === "income" ? totals.income : breakdownType === "upcoming" ? totals.upcoming : totals.expenses;
   const dateForNewTransaction = period === "month" || period === "year" ? range.start : anchorDate;
 
   return {
@@ -144,6 +164,7 @@ export function useFinanceDashboard() {
       closeDialog,
       saveTransaction,
       deleteTransaction,
+      payTransaction,
       addCustomExpenseCategory,
     },
   };

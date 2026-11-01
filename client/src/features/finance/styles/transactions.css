@@ -14,13 +14,18 @@
 .transaction-type-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; flex: 0 0 auto; }
 .type-income { color: #5a916d; background: #eef5ee; }
 .type-expense { color: #c38570; background: #fcf2ec; }
+.type-upcoming { color: #8a6d32; background: #f8f3e8; }
 .date-cell { color: #929b94 !important; text-transform: capitalize; }
 .category-pill { display: inline-flex; align-items: center; gap: 6px; color: #7d8980; background: #f5f7f4; border-radius: 6px; padding: 5px 8px; font-size: 9px; }
 .category-pill .legend-dot { width: 6px; height: 6px; }
 .amount-col, .amount-cell { text-align: right; }
 .amount-cell { color: #c27e6b !important; font-size: 10px !important; font-weight: 700; font-variant-numeric: tabular-nums; }
 .amount-cell.amount-positive { color: #5d8a68 !important; }
-.actions-col { width: 72px; }
+.amount-cell.amount-upcoming { color: #8a6d32 !important; }
+.actions-col { width: 1%; }
+.row-tools { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+.pay-button { height: 26px; padding: 0 8px; border: 1px solid #e4d7b8; border-radius: 7px; color: #6f5824; background: #fbf6ea; font-size: 9px; font-weight: 700; white-space: nowrap; }
+.pay-button:hover { background: #f3ead4; }
 .row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 2px; opacity: .35; transition: opacity .15s ease; }
 tr:hover .row-actions, .row-actions:focus-within { opacity: 1; }
 .row-action { border: 0; width: 27px; height: 27px; display: grid; place-items: center; color: #738178; background: transparent; border-radius: 7px; }

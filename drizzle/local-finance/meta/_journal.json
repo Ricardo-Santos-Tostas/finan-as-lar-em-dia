@@ -8,6 +8,13 @@
       "when": 1793328975165,
       "tag": "0000_peaceful_tomas",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1793500000000,
+      "tag": "0001_upcoming_expenses",
+      "breakpoints": true
     }
   ]
 }
