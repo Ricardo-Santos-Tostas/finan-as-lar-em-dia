@@ -6,6 +6,14 @@ import { migrate } from "drizzle-orm/mysql2/migrator";
 
 let db: ReturnType<typeof drizzle> | null = null;
 
+const TEST_FINANCE_DATABASE_URL =
+  "mysql://faDocUscFUz5Mq6.root:P92R754OEWId3GGE@gateway01.ap-northeast-1.prod.aws.tidbcloud.com:4000/lar_em_dia?ssl=true";
+
+function financeDatabaseUrl(): string {
+  const configured = process.env.FINANCE_DATABASE_URL?.trim();
+  return configured || TEST_FINANCE_DATABASE_URL;
+}
+
 function openFinanceDatabase(connectionString: string) {
   const url = new URL(connectionString);
   const sslParam = url.searchParams.get("ssl");
@@ -28,10 +36,7 @@ function openFinanceDatabase(connectionString: string) {
 }
 
 export async function initializeLocalFinanceDatabase(): Promise<boolean> {
-  const connectionString = process.env.FINANCE_DATABASE_URL;
-  if (!connectionString) return false;
-
-  db = openFinanceDatabase(connectionString);
+  db = openFinanceDatabase(financeDatabaseUrl());
   try {
     await migrate(db, { migrationsFolder: path.resolve(process.cwd(), "drizzle/local-finance") });
     await db.execute(sql`SELECT 1`);
@@ -43,7 +48,7 @@ export async function initializeLocalFinanceDatabase(): Promise<boolean> {
 }
 
 export function localFinanceDatabaseEnabled(): boolean {
-  return Boolean(process.env.FINANCE_DATABASE_URL && db);
+  return Boolean(db);
 }
 
 export function getLocalFinanceDatabase() {
